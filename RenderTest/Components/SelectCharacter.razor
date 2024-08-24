@@ -1,0 +1,30 @@
+﻿@typeparam TItem
+
+<h3>Search Character</h3>
+
+@if (Items == null)
+{
+    <p>Loading Characters...</p>
+}
+else
+{ 
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+
+        @foreach (var item in Items)
+        {
+            <option value="@(itemId++)">@item</option>
+        })
+           
+    </select>
+}
+
+
+@code {
+    public int itemId { get; set; } = 0;
+
+    [Parameter]
+    public IEnumerable<TItem> Items { get; set; } = [];
+
+
+}

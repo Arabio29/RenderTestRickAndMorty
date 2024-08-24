@@ -1,0 +1,48 @@
+﻿@page "/characters"
+
+@using RenderTest.Models
+@using RenderTest.Services
+@using RenderTest.Services.IServices
+@inject IRickAndMortyService service
+
+<div class="container">
+    @if (_rickAndMorty == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var car in _rickAndMorty.results)
+            {
+                <div class="col-6">
+                    <div class="card text-white bg-dark mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="@car.image" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@car.name</h5>
+                                    <p class="card-text"> <span class="fw-normal">Especie: </span><span class="fw-lighter">@car.species</span></p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>        
+    }
+</div>
+
+@code {
+
+    private RickAndMorty _rickAndMorty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _rickAndMorty = await service.Get();
+    }
+
+}

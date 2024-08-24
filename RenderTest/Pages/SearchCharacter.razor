@@ -1,0 +1,54 @@
+﻿@page "/searchcharacter"
+
+@using RenderTest.Models
+@using RenderTest.Services
+@using RenderTest.Services.IServices
+@using RenderTest.Components
+@inject IRickAndMortyService service
+
+<h3>SearchCharacter</h3>
+
+@* @foreach (var car in _rickAndMorty.results)
+{
+    <h2 class="text-danger">@car.name</h2>
+
+    if (car.episode != null)
+    {
+        foreach(var epi in car.episode)
+        {
+            <h2 class="text-danger">@epi</h2>
+        }
+    }
+} *@
+
+<div class="container">
+    <div class="row">
+        <div class="col-4 bg-info">
+            <SelectCharacter Items="Items ">
+
+            </SelectCharacter>
+        </div>
+
+        <div class="col-8 bg-danger">
+            f
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+
+    private RickAndMorty data;
+
+    public SearchCharacter(RickAndMorty data)
+    {
+        this.data = data;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = await service.Get();
+    }
+
+}
